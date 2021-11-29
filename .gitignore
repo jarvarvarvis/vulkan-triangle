@@ -1,0 +1,9 @@
+# CMake related files
+
+.cmake/
+cmake_install.cmake
+CMakeCache.txt
+CMakeFiles/
+
+Makefile
+VulkanTriangle
