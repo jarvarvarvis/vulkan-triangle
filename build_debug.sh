@@ -1,0 +1,2 @@
+cmake -DDEBUGGING=ON .
+make

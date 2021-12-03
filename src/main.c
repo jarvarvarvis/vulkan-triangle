@@ -1,5 +1,3 @@
-//#define DEBUGGING
-
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -66,6 +64,7 @@ int main() {
 		glfwPollEvents();
 	}
 
+        
 	/* Destroy Vulkan Instance */
 	vkDestroyInstance(instance, NULL);
 

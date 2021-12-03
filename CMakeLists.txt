@@ -7,6 +7,10 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(GLFW_MODULE_DIR modules/glfw)
 
+# Debugging flag (for easily enabling Vulkan validation layers)
+if (DEBUGGING)
+	add_definitions(-DDEBUGGING)
+endif ()
 
 # Source and header files
 file(GLOB_RECURSE SOURCE_FILES

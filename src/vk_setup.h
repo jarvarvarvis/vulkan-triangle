@@ -7,6 +7,9 @@
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
+#include "vk_extensions.h"
+#include "vk_validation.h"
+
 VkApplicationInfo vk_setup_make_app_info() {
 	VkApplicationInfo app_info;
 
@@ -29,22 +32,27 @@ VkInstanceCreateInfo vk_setup_make_create_info(VkApplicationInfo *app_info) {
 	create_info.flags = 0;
 	create_info.pApplicationInfo = app_info;
 
-	// Setup extensions using GLFW
-	uint32_t glfw_extension_count = 0;
-	const char **glfw_extensions;
+	// Setup extensions
+	uint32_t extension_count = 0;
+	const char **extensions;
 
-	glfw_extensions = glfwGetRequiredInstanceExtensions(&glfw_extension_count);
+	extensions = vk_extensions_get_required(&extension_count);
 
-	printf("Extensions required by GLFW (%d in total): \n", glfw_extension_count);
-	for (int i = 0; i < glfw_extension_count; ++i) {
-		printf("    - %s\n", glfw_extensions[i]);
+	printf("Required extensions (%d in total): \n", extension_count);
+	for (int i = 0; i < extension_count; ++i) {
+		printf("    - %s\n", extensions[i]);
 	}
         
-	create_info.enabledExtensionCount = glfw_extension_count;
-	create_info.ppEnabledExtensionNames = glfw_extensions;
+	create_info.enabledExtensionCount = extension_count;
+	create_info.ppEnabledExtensionNames = extensions;
 
-	create_info.enabledLayerCount = 0;
-	create_info.ppEnabledLayerNames = NULL;
+	if (ENABLE_VALIDATION_LAYERS) {
+		create_info.enabledLayerCount = VALIDATION_LAYERS_COUNT;
+		create_info.ppEnabledLayerNames = VALIDATION_LAYERS;
+	} else {
+		create_info.enabledLayerCount = 0;
+		create_info.ppEnabledLayerNames = NULL;
+	}
 
 	return create_info;
 }
