@@ -12,7 +12,8 @@ VkResult vk_instance_create(VkInstanceCreateInfo *create_info, VkInstance *insta
 		fprintf(stderr, "Validation layers requested but not available!\n");
 		exit(EXIT_FAILURE);
 	}
-
+	printf("\n");
+        
         return vkCreateInstance(create_info, NULL, instance);	
 }
 

@@ -1,2 +1,2 @@
-cmake -DDEBUGGING=ON .
+cmake -DDEBUGGING=ON -DCMAKE_BUILD_TYPE=Debug .
 make

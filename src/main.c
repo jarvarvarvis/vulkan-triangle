@@ -1,7 +1,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <vulkan/vulkan_core.h>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -13,6 +12,7 @@
 #include "vk_instance.h"
 #include "vk_extensions.h"
 #include "vk_validation.h"
+#include "vk_debug.h"
 
 int main() {
 	GLFWwindow *window;
@@ -49,14 +49,28 @@ int main() {
 
 	free(extensions);
 
-	/* Create Vulkan instance */
+	/* Create Vulkan instance and debug messenger */
 	VkApplicationInfo app_info = vk_setup_make_app_info();
 	VkInstanceCreateInfo create_info = vk_setup_make_create_info(&app_info);
 
 	VkInstance instance;
-	VK_CHECK(vk_instance_create(&create_info, &instance),
-		 "Failed to create Vulkan instance!\n");
+	VK_CHECK(vk_instance_create(&create_info, &instance), "Failed to create Vulkan instance!\n");
 
+
+	/* Setup debug messenger */
+	VkDebugUtilsMessengerEXT debug_messenger;
+	if (ENABLE_VALIDATION_LAYERS) {
+		VkDebugUtilsMessengerCreateInfoEXT debug_create_info;
+		vk_debug_make_messenger_create_info(&debug_create_info);
+		debug_create_info.pUserData = NULL;
+		create_info.pNext = &debug_create_info;
+
+		VK_CHECK(vk_debug_make_messenger(instance, NULL, debug_create_info,
+						 &debug_messenger),
+			 "Failed to create debug messenger!\n");
+	}
+
+	/* Update GLFW context */
 	glfwMakeContextCurrent(window);
 
 	/* GLFW main loop */
@@ -64,8 +78,11 @@ int main() {
 		glfwPollEvents();
 	}
 
-        
-	/* Destroy Vulkan Instance */
+
+	/* Destroy Vulkan Instance and debug messenger */
+	if (ENABLE_VALIDATION_LAYERS) {
+		vk_debug_destroy_messenger(instance, debug_messenger, NULL);
+	}
 	vkDestroyInstance(instance, NULL);
 
 	/* Destroy window & terminate GLFW when the loop was exited */
