@@ -50,7 +50,7 @@ VkInstanceCreateInfo vk_setup_make_create_info(VkApplicationInfo *app_info) {
 		create_info.enabledLayerCount = VALIDATION_LAYERS_COUNT;
 		create_info.ppEnabledLayerNames = VALIDATION_LAYERS;
 
-		// Setup instance creation and destruction-level debug messenging
+		// Setup instance creation and destruction-level debug messenger
 		VkDebugUtilsMessengerCreateInfoEXT debug_create_info;
 		vk_debug_make_messenger_create_info(&debug_create_info);
 		create_info.pNext = &debug_create_info;
