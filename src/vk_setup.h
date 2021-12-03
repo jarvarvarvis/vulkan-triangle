@@ -11,6 +11,7 @@ VkApplicationInfo vk_setup_make_app_info() {
 	VkApplicationInfo app_info;
 
 	app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+	app_info.pNext = NULL;
 	app_info.pApplicationName = "Vulkan Triangle";
 	app_info.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
 	app_info.pEngineName = "No Engine";
@@ -24,6 +25,8 @@ VkInstanceCreateInfo vk_setup_make_create_info(VkApplicationInfo *app_info) {
 	VkInstanceCreateInfo create_info;
 
 	create_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+	create_info.pNext = NULL;
+	create_info.flags = 0;
 	create_info.pApplicationInfo = app_info;
 
 	// Setup extensions using GLFW
@@ -41,6 +44,7 @@ VkInstanceCreateInfo vk_setup_make_create_info(VkApplicationInfo *app_info) {
 	create_info.ppEnabledExtensionNames = glfw_extensions;
 
 	create_info.enabledLayerCount = 0;
+	create_info.ppEnabledLayerNames = NULL;
 
 	return create_info;
 }
