@@ -56,7 +56,6 @@ int main() {
 	VkInstance instance;
 	VK_CHECK(vk_instance_create(&create_info, &instance), "Failed to create Vulkan instance!\n");
 
-
 	/* Setup debug messenger */
 	VkDebugUtilsMessengerEXT debug_messenger;
 	if (ENABLE_VALIDATION_LAYERS) {
@@ -69,6 +68,9 @@ int main() {
 						 &debug_messenger),
 			 "Failed to create debug messenger!\n");
 	}
+
+	/* Physical device selection */
+	
 
 	/* Update GLFW context */
 	glfwMakeContextCurrent(window);
