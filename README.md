@@ -1,7 +1,7 @@
 A single triangle rendered using the Vulkan C API
 
 
-# Note about Validation layers
+## Note about Validation layers
 
 It seems like Vulkan Validation Layers aren't included in the Vulkan SDK on Ubuntu-based Distributions by default (?).
 
