@@ -18,6 +18,7 @@ vk_debug_callback(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,
 
 void vk_debug_make_messenger_create_info(VkDebugUtilsMessengerCreateInfoEXT *create_info) {
 	create_info->sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+	create_info->flags = 0;
 	create_info->pNext = NULL;
 	create_info->messageSeverity =
 		VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
