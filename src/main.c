@@ -70,7 +70,12 @@ int main() {
 	}
 
 	/* Physical device selection */
-	
+
+
+	/* GLFW Window Surface */
+	VkSurfaceKHR surface;
+	VK_CHECK(glfwCreateWindowSurface(instance, window, NULL, &surface),
+		 "Failed to create GLFW window surface!\n");
 
 	/* Update GLFW context */
 	glfwMakeContextCurrent(window);
