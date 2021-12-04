@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vulkan/vulkan_core.h>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -90,6 +91,7 @@ int main() {
 	if (ENABLE_VALIDATION_LAYERS) {
 		vk_debug_destroy_messenger(instance, debug_messenger, NULL);
 	}
+	vkDestroySurfaceKHR(instance, surface, NULL);
 	vkDestroyInstance(instance, NULL);
 
 	/* Destroy window & terminate GLFW when the loop was exited */
