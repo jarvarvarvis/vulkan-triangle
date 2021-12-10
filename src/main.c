@@ -14,6 +14,7 @@
 #include "vk_extensions.h"
 #include "vk_validation.h"
 #include "vk_debug.h"
+#include "vk_physical_device.h"
 
 int main() {
 	GLFWwindow *window;
@@ -71,7 +72,8 @@ int main() {
 	}
 
 	/* Physical device selection */
-
+	VkPhysicalDevice physical_device = vk_physical_device_select(instance);
+	printf("Found suitable Physical Device.\n");
 
 	/* GLFW Window Surface */
 	VkSurfaceKHR surface;
