@@ -72,7 +72,9 @@ int main() {
 
 	/* Physical device selection */
 	VkPhysicalDevice physical_device = vk_physical_device_select(instance);
-	printf("Found suitable Physical Device.\n");
+	VkPhysicalDeviceProperties device_props;
+	vkGetPhysicalDeviceProperties(physical_device, &device_props);
+	printf("Found suitable Physical Device: '%s'\n", device_props.deviceName);
 
 	/* GLFW Window Surface */
 	VkSurfaceKHR surface;
