@@ -7,6 +7,7 @@
 #include <vulkan/vulkan_core.h>
 
 #include "vk_check.h"
+#include "vk_queue_families.h"
 
 int vk_physical_device_rate_device(VkPhysicalDevice device) {
 	VkPhysicalDeviceProperties device_props;
@@ -27,6 +28,14 @@ int vk_physical_device_rate_device(VkPhysicalDevice device) {
 		rating += 10;
 	}
 
+	// If the device doesn't support the required queues, it should have a bad rating.
+	QueueFamilyIndices indices = vk_queue_families_find_for_device(device);
+	if (!vk_queue_families_indices_complete(indices)) {
+		rating -= 200;
+	} else {
+		printf("Device is suitable for processing graphics-related commands!\n");
+	}
+
 	return rating;
 }
 
@@ -37,7 +46,7 @@ VkPhysicalDevice vk_physical_device_select(VkInstance instance) {
 		 "Failed trying to find GPUs with Vulkan support!\n");
 
 	if (device_count == 0) {
-		VK_EXIT_HARD("Failed to find GPUs with Vulkan support!\n");
+		VK_EXIT("Failed to find GPUs with Vulkan support!\n");
 	}
 
 	VkPhysicalDevice devices[device_count];

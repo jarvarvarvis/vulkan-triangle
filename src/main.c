@@ -74,8 +74,11 @@ int main() {
 	VkPhysicalDevice physical_device = vk_physical_device_select(instance);
 	VkPhysicalDeviceProperties device_props;
 	vkGetPhysicalDeviceProperties(physical_device, &device_props);
-	printf("Found suitable Physical Device: '%s'\n", device_props.deviceName);
+	printf("Found best Physical Device: '%s'\n", device_props.deviceName);
 
+	/* Vulkan device queues */
+	// TODO
+        
 	/* GLFW Window Surface */
 	VkSurfaceKHR surface;
 	VK_CHECK(glfwCreateWindowSurface(instance, window, NULL, &surface),
