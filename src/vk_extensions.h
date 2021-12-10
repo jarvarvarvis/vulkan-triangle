@@ -4,8 +4,7 @@
 #include <string.h>
 #include <stdint.h>
 
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
+#include <vulkan/vulkan_core.h>
 
 #include "vk_check.h"
 #include "vk_validation.h"

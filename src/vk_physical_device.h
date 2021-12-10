@@ -5,12 +5,12 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <vulkan/vulkan_core.h>
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
 
 #include "vk_check.h"
 
 bool vk_is_device_suitable(VkPhysicalDevice device) {
+	VkPhysicalDeviceProperties device_props;
+	vkGetPhysicalDeviceProperties(device, &device_props);
 	return true;
 }
 

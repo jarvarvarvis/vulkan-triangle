@@ -3,8 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
+#include <vulkan/vulkan_core.h>
 
 #define VK_EXIT_HARD(...) \
 	fprintf(stderr, __VA_ARGS__); \
